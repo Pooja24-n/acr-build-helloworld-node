@@ -34,5 +34,5 @@ jobs:
 
             appSourcePath: ${{ github.workspace }}
             acrName: lucioregistry
-            acrUsername: ${{ secrets.REGISTRY_USERNAME }}
-            acrPassword: ${{ secrets.REGISTRY_PASSWORD }}
+            acrUsername: ${{ secrets.SP_APP_ID }}
+            acrPassword: ${{ secrets.SP_PASSWD }}
