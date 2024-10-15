@@ -21,8 +21,8 @@ jobs:
             username: ${{ secrets.REGISTRY_USERNAME }}
             password: ${{ secrets.REGISTRY_PASSWORD }}
         - run: |
-            docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/sampleapp:dev
-            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/sampleapp:dev
+            docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/eazydraft/lucio-api:dev
+            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/eazydraft/lucio-api:dev
 
       #  - name: Build and deploy Container App
       #    uses: azure/container-apps-deploy-action@v1
