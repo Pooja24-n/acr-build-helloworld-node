@@ -31,3 +31,4 @@ jobs:
             acrName: lucioregistry
             containerAppName: my-container-app
             resourceGroup: Lucio
+            imageToBuild: ${{ secrets.REGISTRY_LOGIN_SERVER }}/eazydraft/lucio-api:dev
