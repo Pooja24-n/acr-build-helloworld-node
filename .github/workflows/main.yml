@@ -24,10 +24,10 @@ jobs:
             docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/sampleapp:dev
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/sampleapp:dev
 
-        - name: Build and deploy Container App
-          uses: azure/container-apps-deploy-action@v1
-          with:
-            acrName: lucioregistry
-            containerAppName: container-app
-            resourceGroup: lucio-dev
-            imageToDeploy: ${{ secrets.REGISTRY_LOGIN_SERVER }}/sampleapp:dev
+      #  - name: Build and deploy Container App
+      #    uses: azure/container-apps-deploy-action@v1
+      #    with:
+      #      acrName: lucioregistry
+      #      containerAppName: container-app
+      #      resourceGroup: lucio-dev
+      #      imageToDeploy: ${{ secrets.REGISTRY_LOGIN_SERVER }}/sampleapp:dev
