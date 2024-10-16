@@ -22,8 +22,8 @@ jobs:
             username: ${{ secrets.REGISTRY_USERNAME }}
             password: ${{ secrets.REGISTRY_PASSWORD }}
         - run: |
-            docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/eazydraft/lucio-api:dev
-            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/eazydraft/lucio-api:dev
+            docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/sample/lucio-api:dev
+            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/sample/lucio-api:dev
 
         - name: Build and deploy Container App
           uses: azure/container-apps-deploy-action@v1
@@ -32,7 +32,7 @@ jobs:
             acrName: lucioregistry
             containerAppName: my-container-app
             resourceGroup: Lucio
-            imageToDeploy: ${{ secrets.REGISTRY_LOGIN_SERVER }}/eazydraft/lucio-api:dev
+            imageToDeploy: ${{ secrets.REGISTRY_LOGIN_SERVER }}/sample/lucio-api:dev
 
 
     build-and-deploy-instance:
@@ -60,8 +60,8 @@ jobs:
         - name: 'Deploy to Azure Container Instances'
           uses: 'azure/aci-deploy@v1'
           with:
-            resource-group: ${{ secrets.RESOURCE_GROUP }}
-            dns-name-label: ${{ secrets.RESOURCE_GROUP }}${{ github.run_number }}
+            resource-group: Lucio-Dev
+            dns-name-label: Lucio-Dev${{ github.run_number }}
             image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/sampleapp:dev
             registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
             registry-username: ${{ secrets.REGISTRY_USERNAME_INSTANCE }}
