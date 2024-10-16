@@ -66,5 +66,5 @@ jobs:
             registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
             registry-username: ${{ secrets.REGISTRY_USERNAME_INSTANCE }}
             registry-password: ${{ secrets.REGISTRY_PASSWORD_INSTANCE }}
-            name: aci-sampleapp
+            name: aci-sampleapp2
             location: 'Central India'
