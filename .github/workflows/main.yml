@@ -35,36 +35,36 @@ jobs:
             imageToDeploy: ${{ secrets.REGISTRY_LOGIN_SERVER }}/sample/lucio-api:dev
 
 
-    build-and-deploy-instance:
-        runs-on: ubuntu-latest
-        steps:
-        # checkout the repo
-        - name: 'Checkout GitHub Action'
-          uses: actions/checkout@main
-          
-        - name: 'Login via Azure CLI'
-          uses: azure/login@v1
-          with:
-            creds: ${{ secrets.AZURE_CREDENTIALS }}
-        
-        - name: 'Build and push image'
-          uses: azure/docker-login@v1
-          with:
-            login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-            username: ${{ secrets.REGISTRY_USERNAME }}
-            password: ${{ secrets.REGISTRY_PASSWORD }}
-        - run: |
-            docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/sampleapp:dev
-            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/sampleapp:dev
+  #  build-and-deploy-instance:
+  #      runs-on: ubuntu-latest
+  #      steps:
+  #      # checkout the repo
+  #      - name: 'Checkout GitHub Action'
+  #        uses: actions/checkout@main
+  #        
+  #      - name: 'Login via Azure CLI'
+  #        uses: azure/login@v1
+  #        with:
+  #          creds: ${{ secrets.AZURE_CREDENTIALS }}
+  #      
+  #      - name: 'Build and push image'
+  #        uses: azure/docker-login@v1
+  #        with:
+  #          login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+  #          username: ${{ secrets.REGISTRY_USERNAME }}
+  #          password: ${{ secrets.REGISTRY_PASSWORD }}
+  #      - run: |
+  #          docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/sampleapp:dev
+  #          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/sampleapp:dev
 
-        - name: 'Deploy to Azure Container Instances'
-          uses: 'azure/aci-deploy@v1'
-          with:
-            resource-group: Lucio-Dev
-            dns-name-label: Lucio-Dev${{ github.run_number }}
-            image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/sampleapp:dev
-            registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-            registry-username: ${{ secrets.REGISTRY_USERNAME_INSTANCE }}
-            registry-password: ${{ secrets.REGISTRY_PASSWORD_INSTANCE }}
-            name: aci-sampleapp2
-            location: 'Central India'
+#        - name: 'Deploy to Azure Container Instances'
+ #         uses: 'azure/aci-deploy@v1'
+ #         with:
+ #           resource-group: Lucio-Dev
+ #           dns-name-label: Lucio-Dev${{ github.run_number }}
+ #           image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/sampleapp:dev
+ #           registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+ #           registry-username: ${{ secrets.REGISTRY_USERNAME_INSTANCE }}
+ #           registry-password: ${{ secrets.REGISTRY_PASSWORD_INSTANCE }}
+ #           name: aci-sampleapp2
+ #           location: 'Central India'
