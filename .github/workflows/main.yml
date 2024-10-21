@@ -34,7 +34,8 @@ jobs:
             resourceGroup: Lucio
             imageToDeploy: ${{ secrets.REGISTRY_LOGIN_SERVER }}/sample/lucio-api:dev
         - run: |
-            az containerapp revision restart -n my-container-app -g Lucio --revision my-container-app--udglt90
+            revision=$(az containerapp revision list -n lucio-functions-dev -g Lucio-Dev -o tsv | awk -F  ' '  '{print $2}')
+            az containerapp revision restart -n my-container-app -g Lucio --revision $revision
 
 
   #  build-and-deploy-instance:
