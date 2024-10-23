@@ -24,8 +24,13 @@ jobs:
         - run: |
             docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/sample/sample:dev
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/sample/sample:dev
-
-        - name: Build and deploy Container App
+        - run: |
+            az containerapp update --name my-container-app \
+            --resource-group Lucio \
+            --image ${{ secrets.REGISTRY_LOGIN_SERVER }}/sample/sample:dev \
+            --vnet container-vnet \
+            --subnet default
+        #- name: Build and deploy Container App
           #uses: azure/container-apps-deploy-action@v1
           #with:
           #  appSourcePath: ${{ github.workspace }}
@@ -37,12 +42,7 @@ jobs:
         #- run: |
         #    revision=$(az containerapp revision list -n my-container-app -g Lucio -o tsv | awk -F  ' '  '{print $2}')
         #    az containerapp revision restart -n my-container-app -g Lucio --revision $revision
-        - run: |
-            az containerapp update --name my-container-app \
-            --resource-group Lucio \
-            --image ${{ secrets.REGISTRY_LOGIN_SERVER }}/sample/sample:dev \
-            --vnet container-vnet \
-            --subnet default
+        
 
   #  build-and-deploy-instance:
   #      runs-on: ubuntu-latest
